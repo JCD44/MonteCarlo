@@ -1,4 +1,4 @@
-# Project Title
+# MonteCarlo
 
 A package designed to allow market investment simulations with varying inputs and style of market analysis.  You control what data is used by pointing to a CSV, how the investment simulation should behave, such as how your portfolio is setup and how it changes over time.  Then you select the mode, either Monte Carlo or simulating actual history by going through all years.  Finally you run the program and see the results.
 
