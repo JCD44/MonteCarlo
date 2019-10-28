@@ -27,6 +27,7 @@ namespace MonteCarlo.Dispatch
             Write(@"program.exe -InputFile=""C:\fi\le.json""");
             Write(@"program.exe -Create:""C:\valid\file\path\newFile.json""");
             Write(@"program.exe --help");
+            Write(@"program.exe InputFile=""C:\fi\le.json"" EvalMethod=""AllYears"" -Output:GiantCsvConsole");
 
         }
 
