@@ -23,6 +23,11 @@ namespace MonteCarlo.Data
             { "Gold", CsvMapper.Gold_Return }
         };
 
+        public Dictionary<string, string> DisplayNameOfCapeMeasureToHeader = new Dictionary<string, string>()
+        {
+            { "Equity", CsvMapper.CAPE },
+        };
+
         public List<IPortfolioAdjustments> Adjustments { get; set; } = new List<IPortfolioAdjustments>();
         /// <summary>
         /// Used only for JSON files.

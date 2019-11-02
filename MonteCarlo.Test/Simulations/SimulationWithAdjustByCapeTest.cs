@@ -38,7 +38,12 @@ namespace MonteCarlo.Test.Simulations
         {
             return new ReturnData()
             {
-                CAPE = cape,
+                //CAPE = cape,
+                NameToCape = new Dictionary<string, decimal?>()
+                {
+                    { "Equity", cape }
+                },
+                
                 Month = 1,
                 Year = 1929 + row,
                 Row = row,

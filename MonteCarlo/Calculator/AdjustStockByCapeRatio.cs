@@ -39,7 +39,7 @@ namespace MonteCarlo.Calculator
             var maxCapeToDoNothing = maxCapeBeforeAdjustment;
             var percentageAdjustment = percentageAdjusted;
             var amountOfAdditionalCapePerAdjustment = additionalAdjustmentPerCapeExcess;
-            var cape = portfolio.ReturnData.CAPE;
+            var cape = portfolio.ReturnData.NameToCape[from];
             if (cape == null || !cape.HasValue) return portfolio;
             if (cape <= maxCapeToDoNothing) return portfolio;
 
@@ -57,6 +57,10 @@ namespace MonteCarlo.Calculator
 
         public void Init(PortfolioWork portfolio)
         {
+            if(!portfolio.ReturnData.NameToCape.ContainsKey(from))
+            {
+                throw new Exception($"Unable to find '{from}' in DisplayNameOfCapeMeasureToHeader.  Given current configuration would allow from to be: '{string.Join("','", portfolio.ReturnData.NameToCape.Keys)}'.");
+            }
         }
     }
 }

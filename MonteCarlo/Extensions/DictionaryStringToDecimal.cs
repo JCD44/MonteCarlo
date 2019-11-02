@@ -35,6 +35,16 @@ namespace MonteCarlo.Extensions
             return sb.ToString().Trim();
         }
 
+        public static string DictToString(this Dictionary<string, decimal?> dict, string dividingChars = "; ", string quoteVal = "'")
+        {
+            var sb = new StringBuilder();
+            foreach (var item in dict)
+            {
+                sb.Append(item.Key + "=" + quoteVal + item.Value + quoteVal + dividingChars);
+            }
+            return sb.ToString().Trim();
+        }
+
         public static string DictToString(this Dictionary<string, Money> dict, string dividingChars = "; ", string quoteVal = "'")
         {
             var sb = new StringBuilder();

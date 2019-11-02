@@ -63,7 +63,7 @@ The file comes with some documentation, but I'll cover the elements not auto-doc
 * LastYearOfDataUsed: The last year of data to be used when using AllYears.  Useful if you want to simulate a particular era.
 * AdjustmentTranslation: This injects all the adjustments you want to make.  All the various adjustments can be seen in the example file.  More detail below.
 * IncomeAndExpenses: Defines Start and End "Month" (The number of periods or rows that are executed) and amount to adjust by.  Imagine you are making a monthly income of 500 from a part time job you plan on staying at for the next 3 years.  So month 1-36 would be set to an amount of 500.
-
+* DisplayNameOfCapeMeasureToHeader: Display Name defines what kind of CAPE is measured, while the header is where the values are found in the CSV. For example, the CSV might have "S&P 500" which is we called "Equity" in DisplayNameToCsvHeader.  If the CSV has a CAPE column named "S&P 500 CAPE", you would want the DisplayName "Equity" to pair the DisplayName defined in DisplayNameToCsvHeader to the CAPE DisplayName.  In the JSON it would appear like this: "DisplayNameOfCapeMeasureToHeader": { "Equity": "S&P 500 CAPE", }
 
 ### Export CSV
 
@@ -234,8 +234,6 @@ I know there isn't as many tests as I'd like, but this project was originally bu
 
 ### Big Features I'd like to have
 
-* Have the CAPE response support multiple 'CAPE'.  e.g. Historic bond yields or CAPE for a specific set of investments.
-* Better error handling on missing columns.
 * Having CAPE response support multiple different evaluations, e.g. <, >, >=, <=,
 
 

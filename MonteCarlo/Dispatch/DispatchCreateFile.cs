@@ -44,8 +44,8 @@ namespace MonteCarlo.Dispatch
                     Type = "AdjustByGlide",
                     NameToStringValue = new Dictionary<string, List<string>>
                     {
-                        {"from", new List<string>() { "Bond" } },
-                        {"to", new List<string>() { "Equity" } },
+                        {"from", new List<string>() { "Equity" } },
+                        {"to", new List<string>() { "Bond" } },
                     },
                     NameToDecimalValue = new Dictionary<string, decimal>()
                     {

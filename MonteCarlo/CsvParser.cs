@@ -21,11 +21,12 @@ namespace MonteCarlo
             {
                 CsvMapper.GetByDefaultName(CsvMapper.Year),
                 CsvMapper.GetByDefaultName(CsvMapper.Month),
-                CsvMapper.GetByDefaultName(CsvMapper.CAPE),
             };
 
             listOfRequiredWords.AddRange(input.DisplayNameToCsvHeader.Values);
-            foreach(var item in listOfRequiredWords)
+            listOfRequiredWords.AddRange(input.DisplayNameOfCapeMeasureToHeader.Values);
+
+            foreach (var item in listOfRequiredWords)
             {
                 if(!header.Contains(item))
                 {
@@ -54,12 +55,16 @@ namespace MonteCarlo
                         Month = csv.Get<int?>(CsvMapper.GetByDefaultName(CsvMapper.Month)),
                         Row = row++,
                         NameToPercentageReturn = new Dictionary<string, decimal?>(),
-                        CAPE = csv.Get(CsvMapper.GetByDefaultName(CsvMapper.CAPE)).ToNumber()
                     };
 
                     foreach(var item in input.DisplayNameToCsvHeader)
                     {
                         record.NameToPercentageReturn.Add(item.Key, csv.Get(item.Value).ToNumber());
+                    }
+
+                    foreach(var item in input.DisplayNameOfCapeMeasureToHeader)
+                    {
+                        record.NameToCape.Add(item.Key, csv.Get(item.Value).ToNumber());
                     }
 
                     records.Add(record);
