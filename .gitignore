@@ -353,4 +353,6 @@ MigrationBackup/
 .ionide/
 
 #Additional ignores
-*.csv
+#*.csv
+/MonteCarlo/Stock_Bond_Returns_diff.ods
+/MonteCarlo/Stock_Bond_Returns_new.csv

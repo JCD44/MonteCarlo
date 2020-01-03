@@ -12,6 +12,7 @@ namespace MonteCarlo.Data
         public List<Outcome> Outcomes { get; set; }
         public void ProcessOutcomes(InputData input)
         {
+            Input = input;
             var worst = Outcomes.OrderBy(a => a.NewPortfolio.InvestmentAmount).ToList()[0];
             WorstAmount = worst.NewPortfolio.InvestmentAmount;
             WorstMonth = worst.PeriodNumber;
@@ -59,5 +60,6 @@ namespace MonteCarlo.Data
         public int IsCloseFirstMonth { get; private set; }
         public bool IsClose { get; private set; }
         public Dictionary<string, Narvalo.Money> TotalReturnsByCategory { get; private set; }
+        public InputData Input { get; private set; }
     }
 }

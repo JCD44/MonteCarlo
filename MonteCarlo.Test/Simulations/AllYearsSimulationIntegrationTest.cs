@@ -32,7 +32,7 @@ namespace MonteCarlo.Test.Simulations
         }
 
         [Test]
-        public void AllYearsProcessesCorrectly()
+         public void AllYearsProcessesCorrectly()
         {
             var input = new InputData()
             {
@@ -110,21 +110,33 @@ namespace MonteCarlo.Test.Simulations
                     { "Gold", CsvMapper.Gold_Return.Replace(" Return","") }
                 };
 
+            //TODO Remove this test code used to compare two different spreadsheets.
             //FileName = "Stock_Bond_Returns_new.csv";
             //input.FilePath = Path;
 
-            var result2 = sim.ExecuteSimulate(input);
+            //var result2 = sim.ExecuteSimulate(input);
 
-            CompareLogic compareLogic = new CompareLogic();
+            //CompareLogic compareLogic = new CompareLogic()
+            //{
+            //    Config = new ComparisonConfig()
+            //    {
+            //        MembersToIgnore = new List<string>()
+            //        {
+            //            "Input",
+            //        },
+            //    }
+            //};
 
-            var comp = compareLogic.Compare(result1, result2);
+            //var comp = compareLogic.Compare(result1, result2);
             
-            Assert.IsTrue(comp.AreEqual, "Verify data is consistently processed. Diff: " + comp.DifferencesString);
+            //Assert.IsTrue(comp.AreEqual, "Verify data is consistently processed. Diff: " + comp.DifferencesString);
 
             Assert.AreEqual(12, result1.Count, "Verify only 12 months were executed.");
             //Calculated based upon big ern spreadsheet model.
             //Used from old spreadsheet.  New spreadsheet gives new value I need to validate again...
             Assert.AreEqual(-614296.48.AsMoney().Normalize(MidpointRounding.AwayFromZero), result1[0].Outcomes[599].NewPortfolio.InvestmentAmount.Normalize(MidpointRounding.AwayFromZero));
+            //Assert.AreEqual(-614296.48.AsMoney().Normalize(MidpointRounding.AwayFromZero), result2[0].Outcomes[599].NewPortfolio.InvestmentAmount.Normalize(MidpointRounding.AwayFromZero));
+
 
         }
 
