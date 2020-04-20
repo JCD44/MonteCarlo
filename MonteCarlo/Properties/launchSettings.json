@@ -2,7 +2,7 @@
   "profiles": {
     "MonteCarlo": {
       "commandName": "Project",
-      "commandLineArgs": "-InputFile:\"C:\\Users\\JCD\\Documents\\Visual Studio 2019\\Projects\\Git.MonteCarlo\\MonteCarlo\\bin\\Debug\\netcoreapp2.2\\publish\\Test.json\" -ReturnsInputFile:\"C:\\Users\\JCD\\Documents\\Visual Studio 2019\\Projects\\Git.MonteCarlo\\MonteCarlo\\Stock_Bond_Returns2.csv\" -Output=GiantCsvConsole"
+      "commandLineArgs": "-InputFile:\"C:\\Users\\JCD\\Documents\\Visual Studio 2019\\Projects\\Git.MonteCarlo\\MonteCarlo\\bin\\Debug\\netcoreapp2.2\\publish\\Test.json\" -ReturnsInputFile:\"C:\\Users\\JCD\\Documents\\Visual Studio 2019\\Projects\\Git.MonteCarlo\\MonteCarlo\\Stock_Bond_Returns2.csv\" -?"
     }
   }
 }
