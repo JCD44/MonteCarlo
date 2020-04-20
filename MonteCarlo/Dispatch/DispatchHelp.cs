@@ -10,6 +10,8 @@ namespace MonteCarlo.Dispatch
     {
         public void Execute(GenericArgsParser args)
         {
+            Write("Version: " + System.Reflection.Assembly.GetCallingAssembly().GetName().Version);
+
             Write("Program Execution:");
             Write(" - Args: ");
             Write(" 'Help' - Displays this help prompt");
