@@ -240,7 +240,7 @@ I know there isn't as many tests as I'd like, but this project was originally bu
 ## Built With
 
 * Visual Studio 2019
-* .net core 2.2
+* .net core 3.0
 
 ## Contributing
 

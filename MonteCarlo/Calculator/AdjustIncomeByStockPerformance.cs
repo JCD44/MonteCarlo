@@ -23,12 +23,15 @@ namespace MonteCarlo.Calculator
                 if (investmentPercentage > 1) investmentPercentage *= .01M;
                 var weightedReturn = (decimal) ret.NameToPercentageReturn[invest.Key] * investmentPercentage;
                 var amt = port.InvestmentAmount.GetClone();
-                //if (amt.IsNegative) amt = amt.Negate();
-                var investmentReturn = weightedReturn * amt;//TODO Make absolute value -- negative portfolio * postive returns should up the portfolio, not drop it more.
+
+                //Perhaps the best way to handle this is to note if you have 0 or less invested, then the performance ultimately should be 0.
+                if (port.InvestmentAmount<=0) amt = 0M.AsMoney();
+                var investmentReturn = weightedReturn * amt;
                 pl += investmentReturn;
                 portfolio.Returns.Returns.Add(invest.Key, investmentReturn);
             }
             portfolio.Returns.MonthProfitOrLoss = pl;
+
             port.InvestmentAmount += pl;
 
             return portfolio;

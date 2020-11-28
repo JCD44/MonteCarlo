@@ -73,8 +73,6 @@ namespace MonteCarlo.Simulations
         public abstract List<OutcomeSummary> ExecuteSimulate(InputData input);
         public abstract void PrintSimulationSpecificDetails(List<OutcomeSummary> list);
 
-
-
         protected virtual void PrintUserSpecifiedData(List<OutcomeSummary> list, InputData input)
         {
             ReportMap[Mode].Report(list, input);
