@@ -240,7 +240,7 @@ I know there isn't as many tests as I'd like, but this project was originally bu
 ## Built With
 
 * Visual Studio 2019
-* .net core 3.0
+* .net core 3.1
 
 ## Contributing
 
@@ -248,7 +248,8 @@ Feel free to contact me, however any pull request without clear documentation of
 
 ## Versioning
 
-I only plan on versioning the windows build that I provide links to.  For now there are now windows builds, you must download the source, so no version numbers exist.
+1.0.0 - The basic simulation system
+1.0.1 - Added some additional summary reports.  Updated to newer version of .net core.
 
 
 ## Primary Authors
