@@ -25,6 +25,12 @@ namespace MonteCarlo.Data
                 IsCloseFirstMonth = listOfIffyMonths[0].PeriodNumber;
             }
 
+            if (WorstAmount > Input.InitialAmount)
+            {
+                WorstAmount = Input.InitialAmount;
+                WorstMonth = 0;
+            }
+
             var totalReturns = new Dictionary<string, Narvalo.Money>();
             foreach(var item in Outcomes)
             {

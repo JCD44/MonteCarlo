@@ -44,7 +44,7 @@ namespace MonteCarlo.Output.Report
 
         private void PercentageDropFromInitialInvestment(List<OutcomeSummary> list, InputData input)
         {
-            WriteManager.Write($" * % of portfolios had draw downs between:");
+            WriteManager.Write($" * % of portfolios that fell between:");
             var initAmt = input.InitialAmount;
 
             var tenPercentOfInitAmt = initAmt / 10;
@@ -67,14 +67,17 @@ namespace MonteCarlo.Output.Report
                 //lowestValue = initAmt;
             }
 
-            WriteManager.Write($"  - Portfolios draw down between -infinity-10%: {PercentageDropCalculation(outcomeInvestmentAmount, decimal.MinValue, tenPercentOfInitAmt)}");
+            WriteManager.Write($"  - Portfolios that fell between 0-10% of initial investment: {PercentageDropCalculation(outcomeInvestmentAmount, decimal.MinValue, tenPercentOfInitAmt)}");
 
-            foreach (var item in new decimal[] { 10, 20, 30, 40, 50, 60, 70, 80, 90 })
+            foreach (var item in new decimal[] { 10, 20, 30, 40, 50, 60, 70, 80 })
             {
                 var dec = .1M * item;
 
-                WriteManager.Write($"  - Portfolios draw down between  {item}-{item+10}%: {PercentageDropCalculation(outcomeInvestmentAmount, dec * tenPercentOfInitAmt, (dec+1) * tenPercentOfInitAmt)}");
+                WriteManager.Write($"  - Portfolios that fell between {item}-{item+10}%  of initial investment: {PercentageDropCalculation(outcomeInvestmentAmount, dec * tenPercentOfInitAmt, (dec+1) * tenPercentOfInitAmt)}");
             }
+
+            WriteManager.Write($"  - Portfolios that fell between 90-100% of initial investment: {PercentageDropCalculation(outcomeInvestmentAmount, tenPercentOfInitAmt * 9, decimal.MaxValue)}");
+
 
 
         }
