@@ -1,5 +1,5 @@
 ﻿using MonteCarlo.Extensions;
-using Narvalo;
+using NodaMoney;
 using System;
 using System.Collections.Generic;
 using System.Text;

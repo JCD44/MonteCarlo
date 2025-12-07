@@ -1,5 +1,5 @@
 ﻿using MonteCarlo.Extensions;
-using Narvalo;
+using NodaMoney;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,12 +19,12 @@ namespace MonteCarlo.Data
                 TotalIncome += outcome.TotalIncome;
             }
 
-            WorstAmount = worst.NewPortfolio.InvestmentAmount;
+            WorstAmount = worst.NewPortfolio.InvestmentAmount.ToDecimal();
             WorstMonth = worst.PeriodNumber;
             PortolioStartTime = Outcomes[0].ReturnDataDate;
             if (WorstAmount <= 0) IsFail = true;
             var CloseAmount = Outcomes[0].PreviousPortfolio.InvestmentAmount * input.PercentageOfInitialPortolioIsClose;
-            if (WorstAmount <= CloseAmount)
+            if (WorstAmount <= CloseAmount.ToDecimal())
             {
                 IsClose = true;
                 var listOfIffyMonths = Outcomes.Where(a => a.NewPortfolio.InvestmentAmount <= CloseAmount).ToList();
@@ -37,7 +37,7 @@ namespace MonteCarlo.Data
                 WorstMonth = 0;
             }
 
-            var totalReturns = new Dictionary<string, Narvalo.Money>();
+            var totalReturns = new Dictionary<string, Money>();
             foreach (var item in Outcomes)
             {
                 foreach (var ret in item.Returns.Returns)
@@ -56,7 +56,7 @@ namespace MonteCarlo.Data
 
             if (IsFail)
             {
-                FirstFailureMonth = Outcomes.Where(a => a.NewPortfolio.InvestmentAmount < 0).ToList()[0].PeriodNumber;
+                FirstFailureMonth = Outcomes.Where(a => a.NewPortfolio.InvestmentAmount.ToDecimal() < 0).ToList()[0].PeriodNumber;
             }
             else
             {
@@ -74,7 +74,7 @@ namespace MonteCarlo.Data
         public bool IsClose { get; private set; }
         public Money TotalIncome { get; private set; } = 0M.AsMoney();
         public Money TotalExpense { get; private set; } = 0M.AsMoney();
-        public Dictionary<string, Narvalo.Money> TotalReturnsByCategory { get; private set; }
+        public Dictionary<string, Money> TotalReturnsByCategory { get; private set; }
         public InputData Input { get; private set; }
     }
 }

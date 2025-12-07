@@ -1,4 +1,4 @@
-﻿using Narvalo;
+﻿using NodaMoney;
 using System.Collections.Generic;
 
 namespace MonteCarlo.Data

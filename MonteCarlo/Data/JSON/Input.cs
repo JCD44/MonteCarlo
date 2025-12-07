@@ -3,7 +3,7 @@ using MonteCarlo.Extensions;
 using MonteCarlo.Output;
 using Newtonsoft.Json;
 using System.IO;
-using Narvalo;
+using NodaMoney;
 
 namespace MonteCarlo.Data.JSON
 {
@@ -42,6 +42,8 @@ namespace MonteCarlo.Data.JSON
             {
                 ContractResolver = jsonResolver
             };
+            settings.Converters.Add(new DeserializeMoney());
+
 
             tmpInput.Portfolio.InvestmentAmount = 0.AsMoney();
 

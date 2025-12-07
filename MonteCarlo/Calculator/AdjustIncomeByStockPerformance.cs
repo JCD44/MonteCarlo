@@ -1,9 +1,5 @@
 ﻿using CloneExtensions;
-using MonteCarlo.Data;
 using MonteCarlo.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace MonteCarlo.Calculator
 {
@@ -25,7 +21,7 @@ namespace MonteCarlo.Calculator
                 var amt = port.InvestmentAmount.GetClone();
 
                 //Perhaps the best way to handle this is to note if you have 0 or less invested, then the performance ultimately should be 0.
-                if (port.InvestmentAmount<=0) amt = 0M.AsMoney();
+                if (port.InvestmentAmount.ToInt32()<=0) amt = 0M.AsMoney();
                 var investmentReturn = weightedReturn * amt;
                 pl += investmentReturn;
                 portfolio.Returns.Returns.Add(invest.Key, investmentReturn);

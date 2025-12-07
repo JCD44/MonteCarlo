@@ -209,7 +209,7 @@ The code can give you insights into how the program works.  In particular not e
 ### Prerequisites
 
 There are several nuget packages this depends on:
-* Narvalo Money
+* NodaMoney
 * CsvHelper
 * CloneExtensions
 
@@ -240,7 +240,7 @@ I know there isn't as many tests as I'd like, but this project was originally bu
 ## Built With
 
 * Visual Studio 2022
-* .net core 3.1
+* .net 9.0
 
 ## Contributing
 
@@ -250,7 +250,7 @@ Feel free to contact me, however any pull request without clear documentation of
 
 1.0.0 - The basic simulation system
 1.0.1 - Added some additional summary reports.  Updated to newer version of .net core.
-1.0.2 - Added support for basic logic around variable expenses and reporting of expenses
+1.0.2 - Added support for basic logic around variable expenses and reporting of expenses.  Moved to NodaMoney and .net 9.0
 
 ## Primary Authors
 

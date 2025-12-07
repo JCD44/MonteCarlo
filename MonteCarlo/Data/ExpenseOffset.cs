@@ -21,7 +21,7 @@ namespace MonteCarlo.Data
             {
                 //100 dollars / 100 = 1 dollar * 95 = 95 dollar minimum
                 var minimumInDollars = ((portfolio.Input.InitialAmount / 100) * MinPercentageFromInitialPortfolio);
-                if (portfolio.Portfolio.InvestmentAmount < minimumInDollars) return false;
+                if (portfolio.Portfolio.InvestmentAmount.ToDecimal() < minimumInDollars) return false;
             }
 
             return true;

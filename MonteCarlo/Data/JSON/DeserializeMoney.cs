@@ -1,52 +1,39 @@
 ﻿using MonteCarlo.Extensions;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Text;
+using NodaMoney;
 
 namespace MonteCarlo.Data.JSON
 {
-    public class DeserializeMoney : JsonConverter
+    public class DeserializeMoney : JsonConverter<Money>
     {
-        public override bool CanConvert(Type objectType)
-        {
-            return typeof(Narvalo.Money) == objectType;
-        }
-
-        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        public override void WriteJson(JsonWriter writer, Money value, JsonSerializer serializer)
         {
             if (value == null)
             {
                 writer.WriteNull();
             }
             else
-            {                
-                serializer.Serialize(writer, value);
+            {
+                writer.WriteValue(value.Amount);
             }
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override Money ReadJson(JsonReader reader, Type objectType, Money existingValue, bool hasExistingValue, JsonSerializer serializer)
         {
-            var result = 0m.AsMoney();
-
-
-            while (reader.Read())
+            if (reader.TokenType == JsonToken.Float || reader.TokenType == JsonToken.Integer)
             {
-                switch (reader.TokenType)
-                {
-                    case JsonToken.PropertyName:
-                        //propertyName = Convert.ToString(reader.Value);
-
-                        break;
-                    case JsonToken.EndObject:
-                        return result;
-                    default:
-                        result = reader.Value.AsMoneyByCast();
-                        break;
-                }
+                return reader.Value.AsMoneyByCast();
             }
 
-            return result;
+            if (reader.TokenType == JsonToken.Null) return 0m.AsMoney();
+
+            if (reader.TokenType == JsonToken.String)
+            {
+                return reader.Value.AsMoneyByCast();
+            }
+
+            throw new JsonSerializationException($"Invalid token type {reader.TokenType} for Money.");
         }
     }
 

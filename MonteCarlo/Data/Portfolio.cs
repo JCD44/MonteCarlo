@@ -1,4 +1,5 @@
 ﻿using MonteCarlo.Extensions;
+using NodaMoney;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,7 +7,7 @@ namespace MonteCarlo.Data
 {
     public class Portfolio : PortfolioValues
     {
-        public Narvalo.Money InvestmentAmount { get; set; } = 0m.AsMoney();
+        public Money InvestmentAmount { get; set; } = 0m.AsMoney();
         public Dictionary<string, decimal> TemporaryInvestmentAdjustments { get; set; } = new Dictionary<string, decimal>();
 
         public Dictionary<string, decimal> ComputedInvestments()

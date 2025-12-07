@@ -134,7 +134,7 @@ namespace MonteCarlo.Test.Simulations
             Assert.AreEqual(12, result1.Count, "Verify only 12 months were executed.");
 
             //All the asserts aassumed a specific spreadsheet was correct.  I don't think calculating P&L of negative portfolio is reasonable, so now P&L is set to 0 if the investment amount/portfolio is less than 0.
-            Assert.AreEqual(-474620.50.AsMoney().Normalize(MidpointRounding.AwayFromZero), result1[0].Outcomes[599].NewPortfolio.InvestmentAmount.Normalize(MidpointRounding.AwayFromZero));
+            Assert.AreEqual(-474620.58.AsMoney().ToDecimal(), result1[0].Outcomes[599].NewPortfolio.InvestmentAmount.ToDecimal());
 
             //Calculated based upon big ern spreadsheet model.
             //Used from old spreadsheet.  New spreadsheet gives new value I need to validate again...

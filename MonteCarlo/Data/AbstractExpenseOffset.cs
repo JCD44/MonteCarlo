@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using MonteCarlo.Calculator;
-using Narvalo;
+using NodaMoney;
 
 namespace MonteCarlo.Data
 {

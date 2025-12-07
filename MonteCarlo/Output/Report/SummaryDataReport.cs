@@ -1,6 +1,6 @@
 ﻿using MonteCarlo.Data;
 using MonteCarlo.Extensions;
-using Narvalo;
+using NodaMoney;
 using System.Collections.Generic;
 using System.Linq;
 

@@ -19,7 +19,7 @@ namespace MonteCarlo.Calculator
                 if (!item.ShouldOffset(portfolio)) continue;
 
                 //Track income vs expense for reporting.
-                if (item.OffsetAmount > 0) portfolio.TotalIncome += item.OffsetAmount;
+                if (item.OffsetAmount.ToInt32() > 0) portfolio.TotalIncome += item.OffsetAmount;
                 else portfolio.TotalExpense += item.OffsetAmount;
                 portfolio.Portfolio.InvestmentAmount += item.OffsetAmount;
             }
