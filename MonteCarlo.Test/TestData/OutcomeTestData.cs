@@ -2,7 +2,6 @@
 using MonteCarlo.Extensions;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace MonteCarlo.Test.TestData
 {
@@ -48,7 +47,7 @@ namespace MonteCarlo.Test.TestData
                 {
                     MonthProfitOrLoss = 100.AsMoney(),
                 },
-                TotalIncomeAndExpenses = 1000.AsMoney()
+                TotalIncome = 1000.AsMoney()
             };
         }
 

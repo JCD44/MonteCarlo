@@ -47,7 +47,9 @@ namespace MonteCarlo.Test.Data.JSON
                     MembersToIgnore = new List<string>()
                     {
                         "IsNormalized",
-                        "IsRounded"
+                        "IsRounded",
+                        "RoundingStrategy",
+                        "Scale"
                     },
                     DecimalPrecision = 4,
                 }

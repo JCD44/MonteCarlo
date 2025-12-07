@@ -1,8 +1,5 @@
-﻿using CloneExtensions;
-using MonteCarlo.Data;
+﻿using MonteCarlo.Data;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace MonteCarlo.Calculator
 {
@@ -20,7 +17,8 @@ namespace MonteCarlo.Calculator
                 PeriodNumber = portfolio.MonthProcessed,
                 ReturnDataDate = new DateTime((int)portfolio.ReturnData.Year, (int) portfolio.ReturnData.Month, 1),
                 Returns = portfolio.Returns,
-                TotalIncomeAndExpenses = portfolio.TotalIncomeAndExpenses,
+                TotalIncome = portfolio.TotalIncome,
+                TotalExpense = portfolio.TotalExpense,
             };
 
 

@@ -1,10 +1,8 @@
 ﻿using CloneExtensions;
 using MonteCarlo.Data;
 using MonteCarlo.Extensions;
-using Narvalo;
-using System;
+using NodaMoney;
 using System.Collections.Generic;
-using System.Text;
 
 namespace MonteCarlo.Calculator
 {
@@ -16,7 +14,9 @@ namespace MonteCarlo.Calculator
         public int MonthProcessed { get; set; }
         public InputData Input { get; set; }
         public MonthlyReturn Returns { get; set; } = new MonthlyReturn();
-        public Money TotalIncomeAndExpenses { get; set; } = 0M.AsMoney();
+        public Money TotalIncomeAndExpenses { get { return TotalExpense + TotalIncome; } }
+        public Money TotalExpense { get; set; } = 0M.AsMoney();
+        public Money TotalIncome { get; set; } = 0M.AsMoney();
 
         public Portfolio CopyOfPortfolio()
         {

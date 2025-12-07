@@ -1,7 +1,5 @@
 ﻿using MonteCarlo.Calculator;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using NodaMoney;
 
 namespace MonteCarlo.Data
 {
@@ -9,7 +7,7 @@ namespace MonteCarlo.Data
     {
         bool ShouldOffset(PortfolioWork portfolio);
         void Offset(PortfolioWork portfolio);
-        Narvalo.Money OffsetAmount { get; set; }
+        Money OffsetAmount { get; set; }
 
     }
 }

@@ -1,26 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using NodaMoney;
 
 namespace MonteCarlo.Extensions
 {
     public static class MoneyExtensions
     {
-        public static Narvalo.Money AsMoney(this int value)
+
+        public static Currency DefaultCurrency { get {  return Currency.FromCode("USD"); } }
+        public static Money AsMoney(this int value)
         {
-            return new Narvalo.Money(value, Narvalo.Currency.UnitedStatesDollar);
+            return new Money(value, DefaultCurrency, MidpointRounding.AwayFromZero);
         }
-        public static Narvalo.Money AsMoney(this decimal value)
+        public static Money AsMoney(this decimal value)
         {
-            return new Narvalo.Money(value, Narvalo.Currency.UnitedStatesDollar);
+            return new Money(value, DefaultCurrency, MidpointRounding.AwayFromZero);
         }
-        public static Narvalo.Money AsMoney(this double value)
+        public static Money AsMoney(this double value)
         {
-            return new Narvalo.Money((decimal)value, Narvalo.Currency.UnitedStatesDollar);
+            return new Money((decimal)value, DefaultCurrency, MidpointRounding.AwayFromZero);
         }
-        public static Narvalo.Money AsMoneyByCast(this object value)
+        public static Money AsMoneyByCast(this object value)
         {
-            return new Narvalo.Money(Convert.ToDecimal(value), Narvalo.Currency.UnitedStatesDollar);
+            return new Money(Convert.ToDecimal(value), DefaultCurrency, MidpointRounding.AwayFromZero);
         }
 
 

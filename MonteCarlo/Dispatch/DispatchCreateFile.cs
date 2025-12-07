@@ -32,6 +32,7 @@ namespace MonteCarlo.Dispatch
                 StartMonth = 40,
                 EndMonth = 200,
                 OffsetAmount = 800.AsMoney(),
+                MinPercentageFromInitialPortfolio = 100
             });
 
             input.FilePath = "";

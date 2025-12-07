@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using NodaMoney;
 
 namespace MonteCarlo.Extensions
 {
@@ -10,7 +9,7 @@ namespace MonteCarlo.Extensions
         {
             return String.Format("{0:n}", Math.Round(value, 2));
         }
-        public static string MakeReadable(this Narvalo.Money money)
+        public static string MakeReadable(this Money money)
         {
             return money.ToDecimal().MakeReadable();
         }

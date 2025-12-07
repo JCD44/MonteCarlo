@@ -1,9 +1,8 @@
-﻿using System;
+﻿using MonteCarlo.Data;
+using MonteCarlo.Extensions;
+using NodaMoney;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using MonteCarlo.Data;
-using MonteCarlo.Extensions;
 
 namespace MonteCarlo.Output.Report
 {
@@ -13,7 +12,7 @@ namespace MonteCarlo.Output.Report
         {
             WriteManager.Write($" * Percentile Outcomes:");
 
-            var outcomeInvestmentAmount = new List<Narvalo.Money>();
+            var outcomeInvestmentAmount = new List<Money>();
             foreach (var outcome in list)
             {
                 outcomeInvestmentAmount.Add(outcome.Outcomes.Last().NewPortfolio.InvestmentAmount);
@@ -31,7 +30,7 @@ namespace MonteCarlo.Output.Report
             foreach (var item in new double[] { .001, .01, .03, .05, .08, .10, .25, .40, .50, .60, .75, .85, .95, .99, .999 })
             {
                 var value = $"000{item * 100}";
-                WriteManager.Write($"   - {value.Substring(value.Length-4)}%'tile: {outcomesAsDecimal.ToPercentile(item).MakeReadable()}");
+                WriteManager.Write($"   - {value.Substring(value.Length - 4)}%'tile: {outcomesAsDecimal.ToPercentile(item).MakeReadable()}");
             }
             WriteManager.Write($"   - Max: {outcomeInvestmentAmount.Last().ToDecimal().MakeReadable()}");
         }
@@ -53,7 +52,7 @@ namespace MonteCarlo.Output.Report
             //var lowestValue = initAmt;
             foreach (var outcomeSummary in list)
             {
-  
+
                 //foreach (var outcome in outcomeSummary.Outcomes)
                 //{
                 //    var checkedValue = outcome.NewPortfolio.InvestmentAmount;
@@ -61,7 +60,7 @@ namespace MonteCarlo.Output.Report
                 //    {
                 //        lowestValue = checkedValue;
                 //    }
-                    
+
                 //}
                 outcomeInvestmentAmount.Add(outcomeSummary.WorstAmount);
                 //lowestValue = initAmt;
@@ -73,7 +72,7 @@ namespace MonteCarlo.Output.Report
             {
                 var dec = .1M * item;
 
-                WriteManager.Write($"  - Portfolios that fell between {item}-{item+10}%  of initial investment: {PercentageDropCalculation(outcomeInvestmentAmount, dec * tenPercentOfInitAmt, (dec+1) * tenPercentOfInitAmt)}");
+                WriteManager.Write($"  - Portfolios that fell between {item}-{item + 10}%  of initial investment: {PercentageDropCalculation(outcomeInvestmentAmount, dec * tenPercentOfInitAmt, (dec + 1) * tenPercentOfInitAmt)}");
             }
 
             WriteManager.Write($"  - Portfolios that fell between 90-100% of initial investment: {PercentageDropCalculation(outcomeInvestmentAmount, tenPercentOfInitAmt * 9, decimal.MaxValue)}");
