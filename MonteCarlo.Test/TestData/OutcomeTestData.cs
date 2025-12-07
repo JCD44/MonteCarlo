@@ -48,7 +48,7 @@ namespace MonteCarlo.Test.TestData
                 {
                     MonthProfitOrLoss = 100.AsMoney(),
                 },
-                TotalIncomeAndExpenses = 1000.AsMoney()
+                TotalIncome = 1000.AsMoney()
             };
         }
 

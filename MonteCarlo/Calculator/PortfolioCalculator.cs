@@ -20,7 +20,8 @@ namespace MonteCarlo.Calculator
                 PeriodNumber = portfolio.MonthProcessed,
                 ReturnDataDate = new DateTime((int)portfolio.ReturnData.Year, (int) portfolio.ReturnData.Month, 1),
                 Returns = portfolio.Returns,
-                TotalIncomeAndExpenses = portfolio.TotalIncomeAndExpenses,
+                TotalIncome = portfolio.TotalIncome,
+                TotalExpense = portfolio.TotalExpense,
             };
 
 

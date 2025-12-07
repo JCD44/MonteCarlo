@@ -1,4 +1,5 @@
 ﻿using MonteCarlo.Extensions;
+using Narvalo;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -14,6 +15,12 @@ namespace MonteCarlo.Data
         {
             Input = input;
             var worst = Outcomes.OrderBy(a => a.NewPortfolio.InvestmentAmount).ToList()[0];
+            foreach(var outcome in Outcomes)
+            {
+                TotalExpense += outcome.TotalExpense;
+                TotalIncome += outcome.TotalIncome;
+            }
+
             WorstAmount = worst.NewPortfolio.InvestmentAmount;
             WorstMonth = worst.PeriodNumber;
             PortolioStartTime = Outcomes[0].ReturnDataDate;
@@ -65,6 +72,8 @@ namespace MonteCarlo.Data
         public bool IsFail { get; private  set; }
         public int IsCloseFirstMonth { get; private set; }
         public bool IsClose { get; private set; }
+        public Money TotalIncome {  get; private set; } = 0M.AsMoney();
+        public Money TotalExpense {  get; private set; } = 0M.AsMoney();
         public Dictionary<string, Narvalo.Money> TotalReturnsByCategory { get; private set; }
         public InputData Input { get; private set; }
     }

@@ -41,7 +41,7 @@ namespace MonteCarlo
             ValidateFile(file, input);
             
             using (var reader = new StreamReader(file))
-            using (var csv = new CsvReader(reader))
+            using (var csv = new CsvReader(reader, System.Globalization.CultureInfo.InvariantCulture, false))
             {
                 var records = new List<ReturnData>();
                 csv.Read();

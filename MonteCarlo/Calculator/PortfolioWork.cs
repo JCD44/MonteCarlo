@@ -16,7 +16,9 @@ namespace MonteCarlo.Calculator
         public int MonthProcessed { get; set; }
         public InputData Input { get; set; }
         public MonthlyReturn Returns { get; set; } = new MonthlyReturn();
-        public Money TotalIncomeAndExpenses { get; set; } = 0M.AsMoney();
+        public Money TotalIncomeAndExpenses { get { return TotalExpense + TotalIncome; } } 
+        public Money TotalExpense { get; set; } = 0M.AsMoney();
+        public Money TotalIncome { get; set; } = 0M.AsMoney();
 
         public Portfolio CopyOfPortfolio()
         {

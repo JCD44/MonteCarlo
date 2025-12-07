@@ -16,10 +16,11 @@ namespace MonteCarlo.Calculator
         public PortfolioWork Adjust(PortfolioWork portfolio)
         {
             foreach (var item in Offsets) {
-                if (item.StartMonth > portfolio.MonthProcessed) continue;
-                if (item.EndMonth != null && item.EndMonth < portfolio.MonthProcessed) continue;
+                if (!item.ShouldOffset(portfolio)) continue;
 
-                portfolio.TotalIncomeAndExpenses += item.OffsetAmount;
+                //Track income vs expense for reporting.
+                if (item.OffsetAmount > 0) portfolio.TotalIncome += item.OffsetAmount;
+                else portfolio.TotalExpense += item.OffsetAmount;
                 portfolio.Portfolio.InvestmentAmount += item.OffsetAmount;
             }
 
