@@ -1,10 +1,8 @@
 ﻿using MonteCarlo.Extensions;
 using Narvalo;
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace MonteCarlo.Data
 {
@@ -15,7 +13,7 @@ namespace MonteCarlo.Data
         {
             Input = input;
             var worst = Outcomes.OrderBy(a => a.NewPortfolio.InvestmentAmount).ToList()[0];
-            foreach(var outcome in Outcomes)
+            foreach (var outcome in Outcomes)
             {
                 TotalExpense += outcome.TotalExpense;
                 TotalIncome += outcome.TotalIncome;
@@ -26,7 +24,8 @@ namespace MonteCarlo.Data
             PortolioStartTime = Outcomes[0].ReturnDataDate;
             if (WorstAmount <= 0) IsFail = true;
             var CloseAmount = Outcomes[0].PreviousPortfolio.InvestmentAmount * input.PercentageOfInitialPortolioIsClose;
-            if (WorstAmount <= CloseAmount) {
+            if (WorstAmount <= CloseAmount)
+            {
                 IsClose = true;
                 var listOfIffyMonths = Outcomes.Where(a => a.NewPortfolio.InvestmentAmount <= CloseAmount).ToList();
                 IsCloseFirstMonth = listOfIffyMonths[0].PeriodNumber;
@@ -39,14 +38,15 @@ namespace MonteCarlo.Data
             }
 
             var totalReturns = new Dictionary<string, Narvalo.Money>();
-            foreach(var item in Outcomes)
+            foreach (var item in Outcomes)
             {
-                foreach(var ret in item.Returns.Returns)
+                foreach (var ret in item.Returns.Returns)
                 {
                     if (totalReturns.ContainsKey(ret.Key))
                     {
                         totalReturns[ret.Key] += ret.Value;
-                    } else
+                    }
+                    else
                     {
                         totalReturns.Add(ret.Key, ret.Value);
                     }
@@ -69,11 +69,11 @@ namespace MonteCarlo.Data
         public int FirstFailureMonth { get; private set; }
         public int WorstMonth { get; private set; }
         public decimal WorstAmount { get; private set; }
-        public bool IsFail { get; private  set; }
+        public bool IsFail { get; private set; }
         public int IsCloseFirstMonth { get; private set; }
         public bool IsClose { get; private set; }
-        public Money TotalIncome {  get; private set; } = 0M.AsMoney();
-        public Money TotalExpense {  get; private set; } = 0M.AsMoney();
+        public Money TotalIncome { get; private set; } = 0M.AsMoney();
+        public Money TotalExpense { get; private set; } = 0M.AsMoney();
         public Dictionary<string, Narvalo.Money> TotalReturnsByCategory { get; private set; }
         public InputData Input { get; private set; }
     }

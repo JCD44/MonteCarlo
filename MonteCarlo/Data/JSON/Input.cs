@@ -1,12 +1,9 @@
 ﻿using CloneExtensions;
-using MonteCarlo.Calculator;
 using MonteCarlo.Extensions;
 using MonteCarlo.Output;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
+using Narvalo;
 
 namespace MonteCarlo.Data.JSON
 {
@@ -24,18 +21,18 @@ namespace MonteCarlo.Data.JSON
         {
             var tmpInput = input.GetClone();
             var jsonResolver = new PropertyRenameAndIgnoreSerializerContractResolver();
-            jsonResolver.IgnoreProperty(typeof(Narvalo.Currency), "MinorCurrency");
-            jsonResolver.IgnoreProperty(typeof(Narvalo.Currency), "One");
-            jsonResolver.IgnoreProperty(typeof(Narvalo.Money), "IsNormalized");
-            jsonResolver.IgnoreProperty(typeof(Narvalo.Money), "IsRoundable");
-            jsonResolver.IgnoreProperty(typeof(Narvalo.Money), "IsRounded");
-            jsonResolver.IgnoreProperty(typeof(Narvalo.Money), "IsZero");
-            jsonResolver.IgnoreProperty(typeof(Narvalo.Money), "IsNegative");
-            jsonResolver.IgnoreProperty(typeof(Narvalo.Money), "IsNegativeOrZero");
-            jsonResolver.IgnoreProperty(typeof(Narvalo.Money), "IsPositive");
-            jsonResolver.IgnoreProperty(typeof(Narvalo.Money), "IsPositiveOrZero");
-            jsonResolver.IgnoreProperty(typeof(Narvalo.Money), "Sign");
-            jsonResolver.IgnoreProperty(typeof(Narvalo.Money), "Currency");
+            jsonResolver.IgnoreProperty(typeof(Currency), "MinorCurrency");
+            jsonResolver.IgnoreProperty(typeof(Currency), "One");
+            jsonResolver.IgnoreProperty(typeof(Money), "IsNormalized");
+            jsonResolver.IgnoreProperty(typeof(Money), "IsRoundable");
+            jsonResolver.IgnoreProperty(typeof(Money), "IsRounded");
+            jsonResolver.IgnoreProperty(typeof(Money), "IsZero");
+            jsonResolver.IgnoreProperty(typeof(Money), "IsNegative");
+            jsonResolver.IgnoreProperty(typeof(Money), "IsNegativeOrZero");
+            jsonResolver.IgnoreProperty(typeof(Money), "IsPositive");
+            jsonResolver.IgnoreProperty(typeof(Money), "IsPositiveOrZero");
+            jsonResolver.IgnoreProperty(typeof(Money), "Sign");
+            jsonResolver.IgnoreProperty(typeof(Money), "Currency");
             jsonResolver.IgnoreProperty(typeof(InputData), "Adjustments");
             jsonResolver.IgnoreProperty(typeof(InputData), "InitialAmt");
             jsonResolver.IgnoreProperty(typeof(Portfolio), "TemporaryInvestmentAdjustments");
@@ -73,18 +70,18 @@ namespace MonteCarlo.Data.JSON
         public static InputData FromString(string value)
         {
             var jsonResolver = new PropertyRenameAndIgnoreSerializerContractResolver();
-            jsonResolver.IgnoreProperty(typeof(Narvalo.Currency), "MinorCurrency");
-            jsonResolver.IgnoreProperty(typeof(Narvalo.Currency), "One");
-            jsonResolver.IgnoreProperty(typeof(Narvalo.Money), "IsNormalized");
-            jsonResolver.IgnoreProperty(typeof(Narvalo.Money), "IsRoundable");
-            jsonResolver.IgnoreProperty(typeof(Narvalo.Money), "IsRounded");
-            jsonResolver.IgnoreProperty(typeof(Narvalo.Money), "IsZero");
-            jsonResolver.IgnoreProperty(typeof(Narvalo.Money), "IsNegative");
-            jsonResolver.IgnoreProperty(typeof(Narvalo.Money), "IsNegativeOrZero");
-            jsonResolver.IgnoreProperty(typeof(Narvalo.Money), "IsPositive");
-            jsonResolver.IgnoreProperty(typeof(Narvalo.Money), "IsPositiveOrZero");
-            jsonResolver.IgnoreProperty(typeof(Narvalo.Money), "Sign");
-            jsonResolver.IgnoreProperty(typeof(Narvalo.Money), "Currency");
+            jsonResolver.IgnoreProperty(typeof(Currency), "MinorCurrency");
+            jsonResolver.IgnoreProperty(typeof(Currency), "One");
+            jsonResolver.IgnoreProperty(typeof(Money), "IsNormalized");
+            jsonResolver.IgnoreProperty(typeof(Money), "IsRoundable");
+            jsonResolver.IgnoreProperty(typeof(Money), "IsRounded");
+            jsonResolver.IgnoreProperty(typeof(Money), "IsZero");
+            jsonResolver.IgnoreProperty(typeof(Money), "IsNegative");
+            jsonResolver.IgnoreProperty(typeof(Money), "IsNegativeOrZero");
+            jsonResolver.IgnoreProperty(typeof(Money), "IsPositive");
+            jsonResolver.IgnoreProperty(typeof(Money), "IsPositiveOrZero");
+            jsonResolver.IgnoreProperty(typeof(Money), "Sign");
+            jsonResolver.IgnoreProperty(typeof(Money), "Currency");
 
 
             var settings = new JsonSerializerSettings
