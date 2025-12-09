@@ -11,31 +11,38 @@ namespace MonteCarlo.Calculator
             = new Dictionary<string, List<string>>();
         public Dictionary<string, Decimal> NameToDecimalValue { get; set; }
             = new Dictionary<string, Decimal>();
-        //public List<ExpenseOffset> ExpenseOffsets { get; set; }
-        //    = new List<ExpenseOffset>();
+
+        public int StartMonth { get; set; } = 0;
+        public int? EndMonth { get; set; } = null;
 
         public static IPortfolioAdjustments ConvertToAdjustment(AdjustmentTranslationData adjustment)
         {
             var type = adjustment.Type;
-            switch(type)
+            IPortfolioAdjustments adjustBy;
+            switch (type)
             {
                 case "AdjustByGlide":
                     var from = adjustment.NameToStringValue["from"][0];
                     var to = adjustment.NameToStringValue["to"][0];
-                    return new AdjustByGlide(from, to, adjustment.NameToDecimalValue["glide"]);
+                    adjustBy = new AdjustByGlide(from, to, adjustment.NameToDecimalValue["glide"]);
+                    break;
                 case "AdjustByDoingNothing":
+                    //No need to use the Start/EndMonth, so just return.
                     return new AdjustByDoingNothing();
                 //case "AdjustByIncomeAndExpenses":
                 //    return new AdjustByIncomeAndExpenses(adjustment.ExpenseOffsets);
                 case "AdjustByMaxValues":
                     var max = adjustment.NameToDecimalValue;
-                    return new AdjustByMaxMinValues(null, max);
+                    adjustBy = new AdjustByMaxMinValues(null, max);
+                    break;
                 case "AdjustByMinValues":
                     var min = adjustment.NameToDecimalValue;
 
-                    return new AdjustByMaxMinValues(min, null);
+                    adjustBy = new AdjustByMaxMinValues(min, null);
+                    break;
                 case "AdjustIncomeByStockPerformance":
-                    return new AdjustIncomeByStockPerformance();
+                    adjustBy = new AdjustIncomeByStockPerformance();
+                    break;
                 case "AdjustByCapeRatio":
                     var from1 = adjustment.NameToStringValue["from"][0];
                     var to1 = adjustment.NameToStringValue["to"][0];
@@ -43,12 +50,18 @@ namespace MonteCarlo.Calculator
                     var percentageAdjusted = SafeReadValue(adjustment.NameToDecimalValue, "percentage_to_adjust_by");
                     var additionalAdjustmentPerCapeExcess = SafeReadValue(adjustment.NameToDecimalValue, "amount_of_cape_excess_to_increase_adjustment");
 
-                       // (capeOverage / amountOfAdditionalCapePerAdjustment) * percentageAdjustment
+                    // (capeOverage / amountOfAdditionalCapePerAdjustment) * percentageAdjustment
 
-                    return new AdjustByCapeRatio(from1, to1, maxCapeBeforeAction, percentageAdjusted, additionalAdjustmentPerCapeExcess);
+                    adjustBy = new AdjustByCapeRatio(from1, to1, maxCapeBeforeAction, percentageAdjusted, additionalAdjustmentPerCapeExcess);
+                    break;
                 default:
                     throw new Exception($"Type '{type}' is not currently supported.");
             }
+
+            adjustBy.StartMonth = adjustment.StartMonth;
+            adjustBy.EndMonth = adjustment.EndMonth;
+
+            return adjustBy;
         }
 
         private static decimal? SafeReadValue(Dictionary<string, decimal> dict, string key, decimal? defaultValue = null)

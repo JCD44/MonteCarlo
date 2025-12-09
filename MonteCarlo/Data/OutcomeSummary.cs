@@ -73,6 +73,14 @@ namespace MonteCarlo.Data
         public int IsCloseFirstMonth { get; private set; }
         public bool IsClose { get; private set; }
         public Money TotalIncome { get; private set; } = 0M.AsMoney();
+        public Money AverageExpensesEnabled {  get 
+            { 
+                var expenses = (TotalExpense / Input.PeriodsWithinSimulation); 
+                if (expenses.ToDecimal() < 0) expenses = expenses * -1;
+
+                return expenses;
+            } 
+        }
         public Money TotalExpense { get; private set; } = 0M.AsMoney();
         public Dictionary<string, Money> TotalReturnsByCategory { get; private set; }
         public InputData Input { get; private set; }

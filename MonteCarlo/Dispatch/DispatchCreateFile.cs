@@ -51,7 +51,9 @@ namespace MonteCarlo.Dispatch
                     NameToDecimalValue = new Dictionary<string, decimal>()
                     {
                         { "glide", 5m/12 }
-                    }
+                    },
+                    StartMonth = 0,
+                    EndMonth = 30,
                 },
 
                 new AdjustmentTranslationData() {

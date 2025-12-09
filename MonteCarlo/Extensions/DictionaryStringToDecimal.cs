@@ -1,4 +1,6 @@
-﻿using NodaMoney;
+﻿using MonteCarlo.Data;
+using Newtonsoft.Json.Bson;
+using NodaMoney;
 using System.Collections.Generic;
 using System.Text;
 
@@ -12,6 +14,19 @@ namespace MonteCarlo.Extensions
                 dict.Add(key, 0);
 
             dict[key] += value;
+        }
+
+        public static Dictionary<string, decimal> CloneTo(this Dictionary<string, decimal> dictFrom, Dictionary<string, decimal> dictTo)
+        {
+            foreach (var from in dictFrom)
+                dictTo.Add(from.Key, from.Value);
+
+            return dictTo;
+        }
+
+        public static Dictionary<string, decimal> Clone(this Dictionary<string, decimal> dictFrom)
+        {
+            return dictFrom.CloneTo(new Dictionary<string, decimal>());
         }
 
         public static void Upsert(this Dictionary<string, decimal?> dict, string key, decimal? value)

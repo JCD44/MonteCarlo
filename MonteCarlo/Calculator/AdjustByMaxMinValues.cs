@@ -1,5 +1,6 @@
 ﻿using CloneExtensions;
 using MonteCarlo.Data;
+using MonteCarlo.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,12 @@ namespace MonteCarlo.Calculator
 {
     public class AdjustByMaxMinValues : IPortfolioAdjustments
     {
+        public int StartMonth { get; set; } = 0;
+        public int? EndMonth { get; set; } = null;
         public PortfolioWork Adjust(PortfolioWork portfolio)
         {
+            if (!AdjustHelper.ShouldExecute(this, portfolio)) return portfolio;
+
             if (callCount++ > 20) return portfolio;
             var reprocess = false;
             if (max != null)
@@ -24,7 +29,7 @@ namespace MonteCarlo.Calculator
                         var overage = currentVal - maxVal;
                         reprocess = true;
                         portfolio.Portfolio.Investments[item.Key] = maxVal;
-                        var portList = portfolio.Portfolio.Investments.GetClone().Where(a => a.Key != item.Key).ToList();
+                        var portList = portfolio.Portfolio.Investments.Clone().Where(a => a.Key != item.Key).ToList();
 
                         //Warning: This could end up with rounding errors in the 10th decimal place--probably doesn't matter.
                         foreach (var otherInvestments in portList)
@@ -47,7 +52,7 @@ namespace MonteCarlo.Calculator
                         var underage = minVal - currentVal;
                         reprocess = true;
                         portfolio.Portfolio.Investments[item.Key] = minVal;
-                        var portList = portfolio.Portfolio.Investments.GetClone().Where(a => a.Key != item.Key).ToList();
+                        var portList = portfolio.Portfolio.Investments.Clone().Where(a => a.Key != item.Key).ToList();
 
                         var additionalOffset = 0M;
                         do

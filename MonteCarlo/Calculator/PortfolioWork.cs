@@ -20,7 +20,8 @@ namespace MonteCarlo.Calculator
 
         public Portfolio CopyOfPortfolio()
         {
-            return Portfolio.GetClone();
+            return Portfolio.Clone(Portfolio);
+            //return Portfolio.GetClone();
         }
     }
 }

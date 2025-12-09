@@ -6,6 +6,9 @@ namespace MonteCarlo.Calculator
         private readonly string from;
         private readonly string to;
         private readonly decimal glidePerDataRow;
+        public int StartMonth { get; set; } = 0;
+        public int? EndMonth { get; set; } = null;
+
         public AdjustByGlide(string adjustFrom, string adjustTo, decimal glide)
         {
             from = adjustFrom;
@@ -14,6 +17,8 @@ namespace MonteCarlo.Calculator
         }
         public PortfolioWork Adjust(PortfolioWork portfolio)
         {
+            if (!AdjustHelper.ShouldExecute(this, portfolio)) return portfolio;
+
             var cash = portfolio.Portfolio.ComputedInvestments()[from];
             if (cash <= 0) return portfolio;//no cash to remove...
             var equity = portfolio.Portfolio.ComputedInvestments()[to];

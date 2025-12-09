@@ -8,7 +8,7 @@ namespace MonteCarlo.Output.Report
 {
     public class SummaryDataReport : IReport
     {
-        private void Percentiles(List<OutcomeSummary> list, InputData input)
+        private void OutcomePercentiles(List<OutcomeSummary> list, InputData input)
         {
             WriteManager.Write($" * Percentile Outcomes:");
 
@@ -35,11 +35,41 @@ namespace MonteCarlo.Output.Report
             WriteManager.Write($"   - Max: {outcomeInvestmentAmount.Last().ToDecimal().MakeReadable()}");
         }
 
+        private void AverageExpensesEnabledPercentiles(List<OutcomeSummary> list, InputData input)
+        {
+
+            var outcomeInvestmentAmount = new List<Money>();
+            foreach (var outcome in list)
+            {
+                outcomeInvestmentAmount.Add(outcome.AverageExpensesEnabled);
+            }
+            outcomeInvestmentAmount.Sort();
+            //Only document when there are differences in outcomes.
+            if (outcomeInvestmentAmount.First() == outcomeInvestmentAmount.Last()) return;
+
+            WriteManager.Write($" * Average Expenses Outcomes:");
+
+            var outcomesAsDecimal = new List<decimal>();
+
+            foreach (var outcome in outcomeInvestmentAmount)
+            {
+                outcomesAsDecimal.Add(outcome.Amount);
+            }
+
+            WriteManager.Write($"   - Min: {outcomeInvestmentAmount.First().ToDecimal().MakeReadable()}");
+
+            foreach (var item in new double[] { .001, .01, .03, .05, .08, .10, .25, .40, .50, .60, .75, .85, .95, .99, .999 })
+            {
+                var value = $"000{item * 100}";
+                WriteManager.Write($"   - {value.Substring(value.Length - 4)}%'tile: {outcomesAsDecimal.ToPercentile(item).MakeReadable()}");
+            }
+            WriteManager.Write($"   - Max: {outcomeInvestmentAmount.Last().ToDecimal().MakeReadable()}");
+        }
+
         private int PercentageDropCalculation(List<decimal> worstAmounts, decimal low, decimal high)
         {
             return worstAmounts.Count(a => a < high && a >= low);
         }
-
 
         private void PercentageDropFromInitialInvestment(List<OutcomeSummary> list, InputData input)
         {
@@ -49,21 +79,9 @@ namespace MonteCarlo.Output.Report
             var tenPercentOfInitAmt = initAmt / 10;
 
             var outcomeInvestmentAmount = new List<decimal>();
-            //var lowestValue = initAmt;
             foreach (var outcomeSummary in list)
             {
-
-                //foreach (var outcome in outcomeSummary.Outcomes)
-                //{
-                //    var checkedValue = outcome.NewPortfolio.InvestmentAmount;
-                //    if (lowestValue>checkedValue)
-                //    {
-                //        lowestValue = checkedValue;
-                //    }
-
-                //}
                 outcomeInvestmentAmount.Add(outcomeSummary.WorstAmount);
-                //lowestValue = initAmt;
             }
 
             WriteManager.Write($"  - Portfolios that fell between 0-10% of initial investment: {PercentageDropCalculation(outcomeInvestmentAmount, decimal.MinValue, tenPercentOfInitAmt)}");
@@ -76,9 +94,6 @@ namespace MonteCarlo.Output.Report
             }
 
             WriteManager.Write($"  - Portfolios that fell between 90-100% of initial investment: {PercentageDropCalculation(outcomeInvestmentAmount, tenPercentOfInitAmt * 9, decimal.MaxValue)}");
-
-
-
         }
 
         public void Report(List<OutcomeSummary> list, InputData input)
@@ -89,7 +104,8 @@ namespace MonteCarlo.Output.Report
             WriteManager.Write($" * Close to Failures, but not failed ({percentage}% or less initial portfolio): {list.Count(a => a.IsClose && !a.IsFail)}");
             WriteManager.Write($" * Failure Probability: {((decimal)((decimal)list.Count(a => a.IsFail) / (decimal)list.Count) * 100M).MakeReadable()}%");
 
-            Percentiles(list, input);
+            OutcomePercentiles(list, input);
+            AverageExpensesEnabledPercentiles(list, input);
 
             PercentageDropFromInitialInvestment(list, input);
 

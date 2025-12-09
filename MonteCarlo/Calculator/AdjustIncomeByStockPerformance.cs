@@ -8,8 +8,12 @@ namespace MonteCarlo.Calculator
     /// </summary>
     public class AdjustIncomeByStockPerformance : IPortfolioAdjustments
     {
+        public int StartMonth { get; set; } = 0;
+        public int? EndMonth { get; set; } = null;
         public PortfolioWork Adjust(PortfolioWork portfolio)
         {
+            if (!AdjustHelper.ShouldExecute(this, portfolio)) return portfolio;
+
             var port = portfolio.Portfolio;
             var ret = portfolio.ReturnData;
             var pl = 0M.AsMoney();
@@ -18,7 +22,7 @@ namespace MonteCarlo.Calculator
                 var investmentPercentage = invest.Value;
                 if (investmentPercentage > 1) investmentPercentage *= .01M;
                 var weightedReturn = (decimal) ret.NameToPercentageReturn[invest.Key] * investmentPercentage;
-                var amt = port.InvestmentAmount.GetClone();
+                var amt = port.InvestmentAmount;
 
                 //Perhaps the best way to handle this is to note if you have 0 or less invested, then the performance ultimately should be 0.
                 if (port.InvestmentAmount.ToDecimal()<=0) amt = 0M.AsMoney();

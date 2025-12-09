@@ -10,6 +10,21 @@ namespace MonteCarlo.Data
         public Money InvestmentAmount { get; set; } = 0m.AsMoney();
         public Dictionary<string, decimal> TemporaryInvestmentAdjustments { get; set; } = new Dictionary<string, decimal>();
 
+        public static Portfolio Clone(Portfolio portfolio)
+        {
+            var p = new Portfolio() { InvestmentAmount = portfolio.InvestmentAmount };
+            portfolio.TemporaryInvestmentAdjustments.CloneTo(p.TemporaryInvestmentAdjustments);
+            portfolio.Investments.CloneTo(p.Investments);
+            
+            //foreach (var tia in portfolio.TemporaryInvestmentAdjustments)
+            //    p.TemporaryInvestmentAdjustments.Add(tia.Key, tia.Value);
+            //foreach (var investments in portfolio.Investments)
+            //    p.Investments.Add(investments.Key, investments.Value);
+            //WARNING: This is a fast clone, but it requires all variables to be hand copied.
+            
+            return p;
+        }
+
         public Dictionary<string, decimal> ComputedInvestments()
         {
             Dictionary<string, decimal> values = new Dictionary<string, decimal>();

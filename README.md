@@ -248,9 +248,10 @@ Feel free to contact me, however any pull request without clear documentation of
 
 ## Versioning
 
-1.0.0 - The basic simulation system
-1.0.1 - Added some additional summary reports.  Updated to newer version of .net core.
-1.0.2 - Added support for basic logic around variable expenses and reporting of expenses.  Moved to NodaMoney and .net 9.0
+* 1.0.0 - The basic simulation system
+* 1.0.1 - Added some additional summary reports.  Updated to newer version of .net core.
+* 1.0.2 - Added support for basic logic around variable expenses and reporting of expenses.  Moved to NodaMoney and .net 9.0
+* 1.0.3 - Added ability to time the adjust by month.  Improved performance, including the unit tests. 
 
 ## Primary Authors
 

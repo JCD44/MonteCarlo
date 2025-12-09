@@ -51,7 +51,7 @@ namespace MonteCarlo.Simulations
                 var outcome = new PortfolioCalculator().CalculateMonthReturn(work);
                 outcomes.Add(outcome);
                 //Clone first to make sure the copy is a deep clone... then clear out the temp adjustments.
-                portfolio = outcome.NewPortfolio.GetClone();
+                portfolio = Portfolio.Clone(outcome.NewPortfolio);
                 portfolio.TemporaryInvestmentAdjustments.Clear();
             }
 

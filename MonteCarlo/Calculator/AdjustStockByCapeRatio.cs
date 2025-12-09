@@ -8,6 +8,10 @@ namespace MonteCarlo.Calculator
 {
     public class AdjustByCapeRatio : IPortfolioAdjustments
     {
+
+        public int StartMonth { get; set; } = 0;
+        public int? EndMonth { get; set; } = null;
+
         private readonly string from;
         private readonly string to;
         private readonly decimal maxCapeBeforeAdjustment;
@@ -36,6 +40,8 @@ namespace MonteCarlo.Calculator
 
         public PortfolioWork Adjust(PortfolioWork portfolio)
         {
+            if (!AdjustHelper.ShouldExecute(this, portfolio)) return portfolio;
+
             var maxCapeToDoNothing = maxCapeBeforeAdjustment;
             var percentageAdjustment = percentageAdjusted;
             var amountOfAdditionalCapePerAdjustment = additionalAdjustmentPerCapeExcess;
